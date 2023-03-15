@@ -1,57 +1,32 @@
 from task_2 import logger
-import re
-from bs4 import BeautifulSoup
-from fake_headers import Headers
-import requests
-import json
-
-headers = Headers(os='random', browser='random')
-url = 'https://spb.hh.ru/search/vacancy?text=python&area=1&area=2'
-new_list = []
-vac_list = []
+import types
+import os
 
 
-@logger('main.log')
-def pars_vacancy_tags(vacancy_tag):
-    vacancy_links = vacancy_tag.find('a', class_='serp-item__title')['href']
-    try:
-        salary = vacancy_tag.find('span', attrs={'data-qa': "vacancy-serp__vacancy-compensation"}).text. \
-            replace('\u202f', ' ')
-    except AttributeError:
-        salary = 'Не указана'
-    name = vacancy_tag.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-employer'}).text.replace('\xa0', ' ')
-    city = vacancy_tag.find('div', attrs={'data-qa': 'vacancy-serp__vacancy-address'}).text.replace('\xa0', ' ')
-    description = vacancy_tag.find('div', attrs={'data-qa': 'vacancy-serp__vacancy_snippet_requirement'}).text
-    return {
-        'url': vacancy_links,
-        'salary': salary,
-        'name': name,
-        'city': city,
-        'description': description
-    }
+@logger('log.log')
+def flat_generator(list_of_lists):
+    for item in list_of_lists:
+        for i in item:
+            yield i
 
-
+@logger('log.log')
 def test_3():
-    html = requests.get(url, headers=headers.generate())
-    soup = BeautifulSoup(html.text, features='lxml')
-    vacancy_tags = soup.find_all('div', class_='serp-item')
-    for vacancy in vacancy_tags:
-        parsed = pars_vacancy_tags(vacancy)
-        for i in parsed.values():
-            pattern1 = re.search(r'[Dd]jango', i)
-            pattern2 = re.search(r'[Ff]lask', i)
-            if pattern1 or pattern2:
-                new_list.append(parsed)
-    for vac in new_list:
-        vac.pop('description')
-        vac_list.append(vac)
-    record_log(vac_list)
+    list_of_lists_1 = [
+        ['a', 'b', 'c'],
+        ['d', 'e', 'f', 'h', False],
+        [1, 2, None]
+    ]
+
+    for flat_iterator_item, check_item in zip(
+            flat_generator(list_of_lists_1),
+            ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]
+    ):
+        assert flat_iterator_item == check_item
+
+    assert list(flat_generator(list_of_lists_1)) == ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]
+
+    assert isinstance(flat_generator(list_of_lists_1), types.GeneratorType)
 
 
-def record_log(vac):
-    with open('vacancy.log', 'w', encoding='utf-8') as v:
-        json.dump(vac, v, ensure_ascii=False)
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     test_3()

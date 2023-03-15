@@ -1,0 +1,32 @@
+2023-03-15 13:04:14.537570
+flat_generator
+([['a', 'b', 'c'], ['d', 'e', 'f', 'h', False], [1, 2, None]],), {}
+<generator object flat_generator at 0x000001EB9F22AF80>
+2023-03-15 13:04:14.537570
+flat_generator
+([['a', 'b', 'c'], ['d', 'e', 'f', 'h', False], [1, 2, None]],), {}
+<generator object flat_generator at 0x000001EB9F22AF80>
+2023-03-15 13:04:14.538628
+flat_generator
+([['a', 'b', 'c'], ['d', 'e', 'f', 'h', False], [1, 2, None]],), {}
+<generator object flat_generator at 0x000001EB9F22AF80>
+2023-03-15 13:04:14.537570
+test_3
+(), {}
+None
+2023-03-15 13:05:13.732365
+flat_generator
+([['a', 'b', 'c'], ['d', 'e', 'f', 'h', False], [1, 2, None]],), {}
+<generator object flat_generator at 0x000001951E61AF80>
+2023-03-15 13:05:13.733351
+flat_generator
+([['a', 'b', 'c'], ['d', 'e', 'f', 'h', False], [1, 2, None]],), {}
+<generator object flat_generator at 0x000001951E61AF80>
+2023-03-15 13:05:13.734349
+flat_generator
+([['a', 'b', 'c'], ['d', 'e', 'f', 'h', False], [1, 2, None]],), {}
+<generator object flat_generator at 0x000001951E61AF80>
+2023-03-15 13:05:13.732365
+test_3
+(), {}
+None
